@@ -1,6 +1,13 @@
+
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
+import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms";
 import { PopulateDropDownService } from "../populate-drop-down.service";
+import {PromtionServicesService} from "../promtion-services.service";
+import {roleandzones} from "../roleandzones";
+import { from } from "rxjs";
+
+
 
 @Component({
   selector: "app-role-selection",
@@ -22,7 +29,15 @@ export class RoleSelectionComponent implements OnInit {
 
   zones: Array<string> = [];
 
-  constructor(private popService: PopulateDropDownService) {}
+  selectedzone: any;
+  selectedRole: any;
+
+  rolezone: any;
+  
+
+  constructor(private popService: PopulateDropDownService, private service: PromtionServicesService,private http:HttpClient) {}
+
+  
 
   ngOnInit(): void {
     this.getRoles();
@@ -36,4 +51,19 @@ export class RoleSelectionComponent implements OnInit {
   getZones(): void {
     this.zones = this.popService.getZones();
   }
+
+  selectChangeHandler(event: any) {
+    //update the ui
+    this.selectedzone = event.target.value;
+  //console.log(this.selectedzone);
+}
+selectChangeRoleHandler(event: any){
+  this.selectedRole = event.target.value;
+}
+public submitClick(selectedzone: string,selectedRole: string){
+   this.rolezone = new roleandzones(selectedzone,selectedRole);
+   let resp=this.service.submit(this.rolezone);
+   resp.subscribe((data)=>this.rolezone=data);
+      
+}
 }

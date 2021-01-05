@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="row">
+               <div id="custom-search-input">
+                                <div class="input-group col-md-12" style="text-align: center">
+                                    <input type="text" class="search-query form-control" placeholder="Search With Promotion Name"  name="promotionName" [(ngModel)]="promotionName" (keydown.enter)="findByPromotionName()"/>
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-danger" type="button" (click)="findByPromotionName()" >
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+    </div>
+    </div>
+
+    <div class="container">
+        <div class="row col-md-6 col-md-offset-2 custyle">
+        <table class="table table-striped custab">
+<thead>
+<tr>
+<th>promoID</th>
+<th>promoName</th>
+<th>promoDesc</th>
+<th>promoLogo</th>
+<th>zoneId</th>
+<th>zoneName</th>
+<th>breakStartDate</th>
+<th>breakEndDate</th>
+</tr>
+</thead>
+<tbody>
+    
+    <tr *ngFor="let searchpromotion of searchpromotions">
+        <td>{{searchpromotion.promoId}}</td>
+        <td>{{searchpromotion.promoName}}</td>
+        <td>{{searchpromotion.promoDesc}}</td>
+        <td>{{searchpromotion.promoLogo}}</td>
+        <td>{{searchpromotion.zoneId}}</td>
+        <td>{{searchpromotion.zoneName}}</td>
+        <td>{{searchpromotion.breakStartDate | date :'dd-MM-yyyy'}}</td>
+        <td>{{searchpromotion.breakEndDate | date :'dd-MM-yyyy'}}</td>
+    </tr>
+    
+</tbody>
+
+</table>
+   
+</div>
+
+</div>
